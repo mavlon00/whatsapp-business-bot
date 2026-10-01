@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     WHATSAPP_BUSINESS_ACCOUNT_ID: str
     VERIFY_TOKEN: str
     SECRET_KEY: str
+    GROQ_API_KEY: str
 
     class Config:
         env_file = ".env"
