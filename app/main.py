@@ -82,6 +82,35 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/seed")
+def seed_data(db: Session = Depends(get_db)):
+    # Create business if not exists
+    business = db.query(Business).filter(Business.name == "Dravex Demo").first()
+    if not business:
+        business = Business(name="Dravex Demo")
+        db.add(business)
+        db.commit()
+        db.refresh(business)
+
+    # Clear old products
+    db.query(Product).filter(Product.business_id == business.id).delete()
+
+    products = [
+        Product(business_id=business.id, name="Jollof Rice", price=2500, description="Party jollof with chicken", stock=50),
+        Product(business_id=business.id, name="Fried Rice", price=2800, description="Fried rice with mixed proteins", stock=50),
+        Product(business_id=business.id, name="Chicken (Full)", price=4500, description="Grilled full chicken", stock=30),
+        Product(business_id=business.id, name="Pounded Yam & Egusi", price=3200, description="Pounded yam with egusi soup", stock=40),
+        Product(business_id=business.id, name="Soft Drink", price=500, description="Coke, Fanta or Sprite", stock=100),
+        Product(business_id=business.id, name="Bottle Water", price=300, description="75cl water", stock=100),
+    ]
+
+    for p in products:
+        db.add(p)
+    db.commit()
+
+    return {"message": "Database seeded successfully!", "products": len(products)}
+
+
 @app.get("/webhook")
 async def verify_webhook(
     hub_mode: str = Query(None, alias="hub.mode"),
@@ -318,11 +347,9 @@ async def receive_message(request: Request, db: Session = Depends(get_db)):
                 await send_whatsapp_message(from_number, reply)
 
         elif intent == "general":
-            # Natural conversation reply
             await send_whatsapp_message(from_number, ai_reply)
 
         else:
-            # Fallback
             if ai_reply:
                 await send_whatsapp_message(from_number, ai_reply)
             else:
