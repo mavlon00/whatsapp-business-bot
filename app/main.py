@@ -111,6 +111,18 @@ def seed_data(db: Session = Depends(get_db)):
     return {"message": "Database seeded successfully!", "products": len(products)}
 
 
+@app.get("/check")
+def check_data(db: Session = Depends(get_db)):
+    businesses = db.query(Business).all()
+    products = db.query(Product).all()
+    
+    return {
+        "businesses": [{"id": b.id, "name": b.name} for b in businesses],
+        "products_count": len(products),
+        "products": [{"id": p.id, "name": p.name, "business_id": p.business_id} for p in products]
+    }
+
+
 @app.get("/webhook")
 async def verify_webhook(
     hub_mode: str = Query(None, alias="hub.mode"),
