@@ -1,0 +1,87 @@
+.pricing-section {
+  padding: 120px 28px;
+  background: var(--dark3);
+  position: relative;
+  z-index: 1;
+}
+.pricing-grid {
+  max-width: 480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.pricing-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border-white);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 40px 32px;
+  transition: all 0.4s;
+}
+.pricing-card.featured {
+  border-color: var(--glass-border);
+  background: linear-gradient(135deg, rgba(37,211,102,0.08) 0%, rgba(18,140,126,0.04) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.pricing-card.featured::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+}
+.pricing-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(37,211,102,0.12); }
+.plan-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--green), var(--green-dim));
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.plan-name {
+  font-family: "Sora", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.plan-price {
+  font-family: "Sora", sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -1px;
+}
+.plan-price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+.plan-features {
+  list-style: none;
+  margin: 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.plan-features li { display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 0.9rem; }
+.plan-features li i { color: var(--green); font-size: 0.8rem; }
+.btn-plan {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: "Sora", sans-serif;
+}
+.btn-plan-primary { background: linear-gradient(135deg, var(--green), var(--green-dim)); color: #000; }
+.btn-plan-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(37,211,102,0.4); }
+.btn-plan-secondary { background: transparent; border: 1px solid var(--glass-border-white); color: var(--text-primary); }
+.btn-plan-secondary:hover { border-color: var(--glass-border); background: rgba(37,211,102,0.05); transform: translateY(-2px); }

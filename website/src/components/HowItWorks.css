@@ -1,0 +1,28 @@
+﻿.how-section {
+  padding: 120px 28px;
+  background: var(--dark2);
+  position: relative;
+  z-index: 1;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.step-num {
+  font-family: "Sora", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(37,211,102,0.3);
+  margin-bottom: 12px;
+  display: block;
+}
+.step-title {
+  font-family: "Sora", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.step-desc { color: var(--text-muted); font-size: 0.875rem; }
